@@ -1,0 +1,7 @@
+name = "railscout-api"
+main = "api/worker.js"
+compatibility_date = "2026-11-19"
+
+[vars]
+# Set this to the origin of your GitHub Pages site to restrict browser access.
+# ALLOWED_ORIGIN = "https://YOUR-USERNAME.github.io"

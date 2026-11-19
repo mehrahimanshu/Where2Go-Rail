@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10251f"><title>Jaipur Departure Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">J<span>↗</span></div><div><b>RAILSCOUT</b><small>JAIPUR DEPARTURE EXPLORER</small></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <a class="nav active" href="#overview"><span>▦</span> Overview</a>
+    <a class="nav" href="#destinations"><span>⌖</span> Destinations <em>30</em></a>
+    <a class="nav" href="#train-results"><span>≋</span> Train results</a>
+    <div class="side-bottom"><div class="side-note"><div class="pulse"></div><div><b>Railway data connector</b><small id="connectorState">Demo mode · not connected</small></div></div><div class="side-foot">Independent travel planning tool<br>Not affiliated with Indian Railways / IRCTC</div></div>
+  </aside>
+  <main class="main" id="overview">
+    <header class="topbar"><div class="crumb">TRAVEL PLANNING <span>/</span> DEPARTURE SCAN</div><div class="top-actions"><span class="today" id="todayLabel">19 NOV 2026</span><button class="icon-btn" id="helpBtn" title="Help">?</button></div></header>
+    <section class="hero"><div><div class="eyebrow"><span class="eyebrow-dot"></span> YOUR NEXT JOURNEY STARTS HERE</div><h1>Find the route.<br><i>Then pick the trip.</i></h1><p>Compare train options from Jaipur across 30 popular destinations, three dates and two travel classes.</p></div><div class="hero-art"><div class="sun"></div><div class="track t1"></div><div class="track t2"></div><div class="train-illustration"><div class="train-window"></div><div class="train-window"></div><div class="train-window"></div><div class="train-wheel w1"></div><div class="train-wheel w2"></div></div><div class="hero-stamp">JP<br><small>JAIPUR</small></div></div></section>
+    <section class="filters panel">
+      <div class="panel-heading"><div><span class="section-kicker">SEARCH CONFIGURATION</span><h2>Your travel window</h2></div><span class="status-pill demo" id="modePill">DEMO DATA</span></div>
+      <div class="filter-grid">
+        <label class="field"><span>FROM STATION</span><div class="input-wrap fixed"><b>JP</b><strong>Jaipur Junction</strong><small>Rajasthan</small></div></label>
+        <label class="field"><span>JOURNEY DATES</span><div class="date-pills"><button class="date-pill selected" data-date="2026-11-25">25 <small>WED</small></button><button class="date-pill selected" data-date="2026-11-26">26 <small>THU</small></button><button class="date-pill selected" data-date="2026-11-27">27 <small>FRI</small></button></div></label>
+        <label class="field"><span>TRAVEL CLASS</span><div class="class-pills"><button class="class-pill selected" data-class="SL">SL <small>Sleeper</small></button><button class="class-pill selected" data-class="3A">3A <small>AC 3 Tier</small></button></div></label>
+        <label class="field"><span>QUOTA</span><div class="input-wrap fixed quota"><b>GN</b><strong>General</strong><small>Standard quota</small></div></label>
+      </div>
+      <div class="filter-footer"><div class="filter-hint"><span>ⓘ</span> Full scan: up to 90 route lookups (30 destinations × 3 dates). API daily limits apply.</div><div class="actions"><button class="btn btn-ghost" id="resetBtn">Reset</button><button class="btn btn-primary" id="scanBtn"><span>↗</span> Scan destinations</button></div></div>
+    </section>
+    <section class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-top"><span>DESTINATIONS</span><span class="stat-icon">⌖</span></div><strong id="statDest">30</strong><small>In your shortlist</small></div>
+      <div class="stat-card"><div class="stat-top"><span>TRAIN OPTIONS</span><span class="stat-icon">⇄</span></div><strong id="statTrains">—</strong><small id="statTrainsSub">Run a scan to populate</small></div>
+      <div class="stat-card"><div class="stat-top"><span>AVAILABLE TRAINS</span><span class="stat-icon green">✓</span></div><strong id="statAvailable">—</strong><small>SL + 3A combined</small></div>
+      <div class="stat-card"><div class="stat-top"><span>BERTHS REPORTED</span><span class="stat-icon amber">▤</span></div><strong id="statBerths">—</strong><small>Only where numeric count is supplied</small></div>
+    </section>
+    <section class="content-grid">
+      <div class="panel chart-panel" id="destinations"><div class="panel-heading"><div><span class="section-kicker">ROUTE COMPARISON</span><h2>Where can you go?</h2><p>Destinations ranked by train availability for the selected dates.</p></div><select id="chartDate" class="select"><option value="all">All selected dates</option><option value="2026-11-25">25 Nov</option><option value="2026-11-26">26 Nov</option><option value="2026-11-27">27 Nov</option></select></div><div class="legend"><span><i class="dot available"></i> Available</span><span><i class="dot rac"></i> RAC</span><span><i class="dot wait"></i> Waitlist / other</span></div><div id="chart" class="bar-chart"><div class="empty-chart">Run a scan to see destination comparisons.</div></div><div class="chart-foot"><span>Counts are train-class results, not unique trains.</span><span id="chartMeta">Awaiting scan</span></div></div>
+      <div class="panel insight-panel"><div class="panel-heading"><div><span class="section-kicker">QUICK INSIGHTS</span><h2>Trip finder</h2></div><span class="spark">✳</span></div><div class="insight-main"><div class="insight-icon">✦</div><b id="insightTitle">Your shortlist is ready</b><p id="insightText">Scan the dates to discover which destinations have the strongest train options.</p></div><div class="insight-list"><div><span class="mini-icon green-bg">✓</span><span><b>Best availability</b><small id="bestDest">Waiting for scan</small></span></div><div><span class="mini-icon blue-bg">↗</span><span><b>Most train options</b><small id="mostTrains">Waiting for scan</small></span></div><div><span class="mini-icon amber-bg">◷</span><span><b>Data freshness</b><small id="freshness">Demo data only</small></span></div></div></div>
+    </section>
+    <section class="panel table-panel" id="train-results"><div class="panel-heading table-heading"><div><span class="section-kicker">DESTINATION SCORECARD</span><h2>All destinations</h2><p>Compare trains and reported availability by date. Select a row to inspect train details.</p></div><div class="table-tools"><input id="searchInput" class="search" placeholder="Search destination…"><select id="sortSelect" class="select"><option value="available">Most available</option><option value="trains">Most trains</option><option value="name">Name A–Z</option></select></div></div>
+      <div class="table-scroll"><table><thead><tr><th>DESTINATION</th><th>25 NOV · WED</th><th>26 NOV · THU</th><th>27 NOV · FRI</th><th>TRAIN OPTIONS</th><th>AVAILABLE TRAINS</th><th>BERTHS*</th><th></th></tr></thead><tbody id="destinationRows"><tr><td colspan="8" class="empty-row">No scan results yet. Select your dates and scan destinations.</td></tr></tbody></table></div><div class="table-foot"><span>*Berth total is shown only when provider returns a numeric count. Blank does not mean zero.</span><button class="text-btn" id="exportBtn">↓ Export CSV</button></div></section>
+    <footer class="footer"><span>RAILSCOUT · BUILT FOR BETTER GETAWAYS</span><span>Availability can change quickly. Always verify before booking.</span></footer>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal-backdrop" id="modal"><div class="modal"><button class="modal-close" id="modalClose">×</button><span class="section-kicker">TRAIN DETAILS</span><h2 id="modalTitle">Destination</h2><p id="modalSub" class="modal-sub"></p><div id="modalBody"></div><div class="modal-actions"><a id="bookLink" class="btn btn-primary" target="_blank" rel="noopener">Open IRCTC ↗</a><button class="btn btn-ghost" id="modalDone">Close</button></div></div></div>
+<script src="config.js"></script><script src="app.js"></script>
+<script>setTimeout(()=>document.getElementById("scanBtn").click(),100);</script></body></html>
